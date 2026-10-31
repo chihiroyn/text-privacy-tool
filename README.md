@@ -77,6 +77,22 @@ Excelでは、各ワークシートのセル内テキストが置換対象です
 
 Wordでは、本文・表・ヘッダー・フッターなどのテキストが置換対象です。Wordの読み書きには `polydoc[docx]` の追加依存関係が必要です。
 
+## 入力ファイルと変換リストの配置
+
+変換対象のファイルと変換リストCSVは、`data/` フォルダに格納してください。`data/` 配下のファイルはGit管理対象外です。
+
+```text
+data/
+├── input.txt
+└── mapping.csv
+```
+
+実行例:
+
+```bash
+python anonymizer.py data/input.txt data/mapping.csv
+```
+
 ## サンプル
 
 サンプルは `samples/` フォルダにあります。

@@ -31,5 +31,9 @@ htmlcov/
 # Generated anonymized output
 *_anonymized.*
 
+# Local input and output data
+data/*
+!data/.gitkeep
+
 # macOS
 .DS_Store

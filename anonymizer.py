@@ -103,7 +103,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "input", type=Path, help="変換対象のテキスト、Excel、またはWordファイル"
     )
-    parser.add_argument("mapping", type=Path, help="変換リストCSV")
+    parser.add_argument("conversion_list", type=Path, help="変換リストCSV")
     return parser
 
 
@@ -111,7 +111,7 @@ def main(argv: list[str] | None = None) -> int:
     """CUIのエントリーポイント。"""
     args = build_parser().parse_args(argv)
     try:
-        anonymize(args.input, args.mapping, default_output_path(args.input))
+        anonymize(args.input, args.conversion_list, default_output_path(args.input))
     except (OSError, MappingError, RuntimeError, ValueError) as error:
         print(f"エラー: {error}", file=sys.stderr)
         return 1
