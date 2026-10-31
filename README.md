@@ -6,7 +6,40 @@ UTF-8テキスト（`.txt`、`.text`、`.log`、`.rst`、`.asc`、`.md`、`.mark
 
 ## セットアップ
 
+### Windows（PowerShell）
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
+
+PowerShellでスクリプト実行が制限されている場合は、現在のセッションだけ許可してからアクティベートしてください。
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\.venv\Scripts\Activate.ps1
+```
+
+### Windows（コマンドプロンプト）
+
+```bat
+py -m venv .venv
+.venv\Scripts\activate.bat
+python -m pip install -r requirements.txt
+```
+
+仮想環境を終了する場合は、次を実行します。
+
+```text
+deactivate
+```
+
+### macOS / Linux
+
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
