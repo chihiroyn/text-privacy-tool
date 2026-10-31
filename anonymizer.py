@@ -59,6 +59,9 @@ def load_replacements(path: Path) -> list[Replacement]:
 
 def anonymize(input_path: Path, mapping_path: Path, output_path: Path) -> None:
     """CSVの順番で置換する。UTF-8テキストでは元の改行を保持する。"""
+    if input_path.resolve() == output_path.resolve():
+        raise ValueError("入力ファイルと出力ファイルには別のパスを指定してください")
+
     try:
         import polydoc
     except ImportError as error:
@@ -95,9 +98,11 @@ def default_output_path(input_path: Path) -> Path:
 def build_parser() -> argparse.ArgumentParser:
     """CUI引数を定義する。"""
     parser = argparse.ArgumentParser(
-        description="CSVの変換リストに従ってテキスト中の個人情報を匿名化します。"
+        description="CSVの変換リストに従ってテキスト、Excel、Wordファイルを変換します。"
     )
-    parser.add_argument("input", type=Path, help="匿名化対象のテキストファイル")
+    parser.add_argument(
+        "input", type=Path, help="変換対象のテキスト、Excel、またはWordファイル"
+    )
     parser.add_argument("mapping", type=Path, help="変換リストCSV")
     return parser
 

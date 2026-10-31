@@ -44,6 +44,14 @@ class LoadReplacementsTest(unittest.TestCase):
             default_output_path(Path("/tmp/input.txt")),
             Path("/tmp/input_anonymized.txt"),
         )
+        self.assertEqual(
+            default_output_path(Path("/tmp/input.xlsx")),
+            Path("/tmp/input_anonymized.xlsx"),
+        )
+        self.assertEqual(
+            default_output_path(Path("/tmp/input.docx")),
+            Path("/tmp/input_anonymized.docx"),
+        )
 
     def test_anonymize_preserves_exact_text_layout(self) -> None:
         mapping = self.write_csv("original,replacement\n山田,利用者A\n")
@@ -65,6 +73,11 @@ class LoadReplacementsTest(unittest.TestCase):
                     output.read_bytes(), content.replace("山田", "利用者A").encode("utf-8")
                 )
                 self.assertEqual(source.read_bytes(), original)
+
+    def test_rejects_same_input_and_output_path(self) -> None:
+        path = Path(self.tempdir.name) / "input.xlsx"
+        with self.assertRaises(ValueError):
+            anonymize(path, path, path)
 
 
 if __name__ == "__main__":

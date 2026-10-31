@@ -1,1 +1,1 @@
-polydoc==0.1.4
+polydoc[docx,xlsx]==0.1.4
